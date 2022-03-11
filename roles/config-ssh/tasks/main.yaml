@@ -1,0 +1,13 @@
+- name: Configure sshd on new machine
+  lineinfile:
+    path: "/home/sshd_config"
+    regex: "^(#)?{{item.key}}"
+    line: "{{item.key}} {{item.value}}"
+    state: present
+  loop:
+    - key: "Port"
+      value: "9922"
+    - key: "PermitRootLogin"
+      value: "no"
+  notify:
+    - restart sshd

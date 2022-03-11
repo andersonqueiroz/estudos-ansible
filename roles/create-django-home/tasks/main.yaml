@@ -1,0 +1,5 @@
+- name: Clone project codebase
+  import_tasks: create-codebase.yaml
+
+- name: Install python requirements
+  import_tasks: install-requirements.yaml

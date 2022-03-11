@@ -1,0 +1,41 @@
+server {
+
+    listen 443 ssl;
+    listen [::]:443 ssl;
+
+    server_name {{ nginx_server_name }};
+
+    location = /favicon.ico { access_log off; log_not_found off; }
+
+    location /static {
+        autoindex on;
+        alias {{ project_codebase_dir }}/staticfiles/;
+    }
+
+    location /media {
+        autoindex off;
+        alias {{ project_codebase_dir }}/media/;
+    }
+
+    location / {
+        include proxy_params;
+        proxy_pass http://unix:{{ project_codebase_dir }}/{{ project_name }}.sock;
+    }
+
+    ssl_certificate /etc/letsencrypt/live/{{ nginx_server_name }}/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/{{ nginx_server_name }}/privkey.pem;
+    include /etc/letsencrypt/options-ssl-nginx.conf; 
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
+}
+
+server {
+    listen 80;
+    listen [::]:80;
+    server_name {{ nginx_server_name }};
+
+    if ($host = {{ nginx_server_name }}) {
+        return 301 https://$host$request_uri;
+    }
+
+    return 404;
+}

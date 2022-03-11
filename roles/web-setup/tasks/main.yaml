@@ -1,0 +1,5 @@
+- name: Create gunicorn daemon
+  import_tasks: setup-gunicorn-daemon.yaml
+
+- name: Install and configure nginx
+  import_tasks: setup-nginx.yaml

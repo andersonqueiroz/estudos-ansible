@@ -1,0 +1,7 @@
+- name: Deploy django application
+  hosts: django-host
+
+  roles:
+  - role: create-django-home
+  - role: web-setup
+  - role: ssl-setup

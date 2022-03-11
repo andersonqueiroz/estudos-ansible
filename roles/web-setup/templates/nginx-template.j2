@@ -1,0 +1,21 @@
+server {
+    listen 80;
+    server_name {{ nginx_server_name }};
+
+    location = /favicon.ico { access_log off; log_not_found off; }
+
+    location /static {
+        autoindex on;
+        alias {{ project_codebase_dir }}/staticfiles/;
+    }
+
+    location /media {
+        autoindex off;
+        alias {{ project_codebase_dir }}/media/;
+    }
+
+    location / {
+        include proxy_params;
+        proxy_pass http://unix:{{ project_codebase_dir }}/{{ project_name }}.sock;
+    }
+}

@@ -1,0 +1,11 @@
+#General
+project_name: frequencia
+project_base_dir: /data/{{project_name}}
+project_codebase_dir: /data/{{project_name}}/{{project_name}}
+
+#Git
+project_git_url: https://github.com/andersonqueiroz/frequencia.git
+project_git_branch: master
+
+#NGINX
+nginx_server_name: domain.com

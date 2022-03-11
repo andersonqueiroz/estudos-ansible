@@ -1,0 +1,22 @@
+- name: Installing NGINX
+  ansible.builtin.apt:
+    name: nginx
+    state: latest
+
+- name: Configuring NGINX
+  ansible.builtin.template:
+    src: "../templates/nginx-template.j2"
+    dest: /etc/nginx/sites-available/{{ project_name }}
+
+- name: Create NGINX sites-enabled directory
+  ansible.builtin.file:
+    path: /etc/nginx/sites-enabled/
+    state: directory
+
+- name: Creating symlink to expose service
+  ansible.builtin.file:
+    src: /etc/nginx/sites-available/{{ project_name }}
+    dest: /etc/nginx/sites-enabled/{{ project_name }}
+    state: link
+  notify:
+    - restart nginx

@@ -1,0 +1,17 @@
+- name: Create base directory for django project
+  ansible.builtin.file:
+    path: "{{ project_base_dir }}"
+    state: directory
+    mode: '0755'
+
+- name: Clone django application
+  ansible.builtin.git:
+    repo: "{{ project_git_url }}"
+    dest: "{{ project_codebase_dir }}"
+    single_branch: yes
+    version: "{{ project_git_branch }}"
+
+- name: Copy .env file
+  ansible.builtin.copy:
+    src: "{{ playbook_dir }}/copy_files/.env"
+    dest: "{{ project_codebase_dir }}/.env"

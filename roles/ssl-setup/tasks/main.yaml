@@ -1,0 +1,2 @@
+- name: Configure cerbot
+  import_tasks: setup-certbot.yaml

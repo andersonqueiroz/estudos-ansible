@@ -1,0 +1,5 @@
+- name: Config SSH
+  hosts: django-host
+
+  roles:
+    - role: config-ssh

@@ -1,0 +1,17 @@
+- name: Creating gunicorn daemon
+  ansible.builtin.template:
+    src: "../templates/gunicorn-template.j2"
+    dest: /etc/systemd/system/gunicorn-{{ project_name }}.service
+    mode: '0644'
+
+- name: Restart gunicorn daemon
+  ansible.builtin.systemd:
+    state: restarted
+    daemon_reload: yes
+    name: "gunicorn-{{ project_name }}.service"
+
+- name: Enable gunicorn service
+  ansible.builtin.systemd:
+    name: "gunicorn-{{ project_name }}.service"
+    state: started
+    enabled: yes

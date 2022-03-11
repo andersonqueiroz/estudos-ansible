@@ -1,0 +1,12 @@
+[Unit]
+Description= {{ project_name }} gunicorn daemon
+After=network.target
+
+[Service]
+User=root
+Group=www-data
+WorkingDirectory={{ project_codebase_dir }}
+ExecStart={{ project_base_dir }}/venv/bin/gunicorn --error-logfile /var/log/nginx/gunicorn-{{ project_name }}-error.log --workers 1 --bind unix:{{ project_codebase_dir }}/{{ project_name }}.sock {{ project_name }}.wsgi:application
+
+[Install]
+WantedBy=multi-user.target

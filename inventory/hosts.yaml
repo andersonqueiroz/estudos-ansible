@@ -1,0 +1,6 @@
+all:
+  hosts:    
+    django-host:
+      ansible_host: zenon
+      ansible_user: root
+      ansible_port: "2046"
