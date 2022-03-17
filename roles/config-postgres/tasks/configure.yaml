@@ -1,0 +1,45 @@
+- name: Create a new database
+  postgresql_db:
+    name: "{{ database_name }}"
+    encoding: UTF-8
+  become: true
+  become_user: postgres
+
+- name: Create user
+  postgresql_user:
+    db: "{{ database_name }}"
+    name: "{{ database_user }}"
+    password: "{{ database_password }}"
+  become: true
+  become_user: postgres
+
+- name: Set owner
+  postgresql_owner:
+    db: "{{ database_name }}"
+    new_owner: "{{ database_user }}"
+    obj_type: database
+  become: true
+  become_user: postgres
+
+- name: Grant all privileges
+  postgresql_privs:
+    db: "{{ database_name }}"
+    privs: ALL
+    type: database
+    role: "{{ database_user }}"
+  become: true
+  become_user: postgres
+
+- name: Set default_transaction_isolation
+  postgresql_query:
+    db: "{{ database_name }}"
+    query: ALTER ROLE {{ database_user }} SET default_transaction_isolation TO 'read committed'
+  become: true
+  become_user: postgres
+
+- name: Set timezone
+  postgresql_query:
+    db: "{{ database_name }}"
+    query: ALTER ROLE {{ database_user }} SET timezone TO 'UTC'
+  become: true
+  become_user: postgres

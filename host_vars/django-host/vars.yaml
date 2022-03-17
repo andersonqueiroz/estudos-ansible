@@ -1,0 +1,16 @@
+#General
+project_name: "{{ vault_project_name }}"
+project_base_dir: /data/{{project_name}}
+project_codebase_dir: /data/{{project_name}}/{{project_name}}
+
+#Database
+database_name: "{{project_name}}_db"
+database_user: "{{project_name}}_user"
+database_password: "{{ vault_database_password }}"
+
+#Git
+project_git_branch: master
+project_git_url: "{{ vault_project_git_url }}"
+
+#NGINX
+nginx_server_name: "{{ vault_nginx_server_name }}"

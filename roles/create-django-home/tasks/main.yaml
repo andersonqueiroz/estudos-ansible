@@ -3,3 +3,6 @@
 
 - name: Install python requirements
   import_tasks: install-requirements.yaml
+
+- name: run django managements
+  import_tasks: django-management.yaml

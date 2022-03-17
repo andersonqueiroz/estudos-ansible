@@ -1,4 +1,9 @@
 - name: restart nginx
-  ansible.builtin.service:
+  ansible.builtin.systemd:
     name: nginx
+    state: restarted
+
+- name: restart gunicorn
+  ansible.builtin.systemd:
+    name: "gunicorn-{{ project_name }}.service"
     state: restarted

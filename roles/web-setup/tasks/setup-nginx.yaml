@@ -20,3 +20,4 @@
     state: link
   notify:
     - restart nginx
+    - restart gunicorn

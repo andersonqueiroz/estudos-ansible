@@ -1,0 +1,5 @@
+- name: Install postgresql and libs
+  import_tasks: install.yaml
+
+- name: Configure database
+  import_tasks: configure.yaml

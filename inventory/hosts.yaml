@@ -1,6 +1,6 @@
 all:
   hosts:    
     django-host:
-      ansible_host: zenon
+      ansible_host: hostname
       ansible_user: root
-      ansible_port: "2046"
+      ansible_port: "22"

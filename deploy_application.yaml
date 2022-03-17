@@ -2,6 +2,7 @@
   hosts: django-host
 
   roles:
+  - role: config-postgres
   - role: create-django-home
   - role: web-setup
   - role: ssl-setup

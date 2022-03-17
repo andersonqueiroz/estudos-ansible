@@ -4,7 +4,7 @@
     dest: /etc/systemd/system/gunicorn-{{ project_name }}.service
     mode: '0644'
 
-- name: Restart gunicorn daemon
+- name: Restart and enable gunicorn daemon
   ansible.builtin.systemd:
     state: restarted
     daemon_reload: yes
